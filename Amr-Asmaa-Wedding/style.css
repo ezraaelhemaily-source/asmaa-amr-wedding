@@ -1,0 +1,678 @@
+
+:root {
+    --burgundy: #4b101d;
+    --dark-burgundy: #2c0710;
+    --cream: #f8eee3;
+    --paper: #fffaf3;
+    --gold: #c8a24a;
+    --dark-gold: #9d762d;
+    --brown: #704d3c;
+    --light-brown: #ad876a;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    background: var(--cream );
+    color: var(--burgundy);
+    font-family: "Montserrat", sans-serif;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================
+   Opening Screen
+========================= */
+
+.opening-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    background:
+        radial-gradient(
+            circle at center,
+            #fffaf4 0%,
+            var(--cream) 58%,
+            #e8d1b9 100%
+        );
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.opening-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.top-title {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+    color: var(--dark-gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 5px;
+}
+
+.decor {
+    position: absolute;
+    z-index: 1;
+    color: rgba(157, 118, 45, 0.3);
+    font-family: Georgia, serif;
+    font-size: 110px;
+}
+
+.flower-left {
+    top: 8%;
+    left: -20px;
+    transform: rotate(-25deg);
+}
+
+.flower-right {
+    right: -20px;
+    bottom: 8%;
+    transform: rotate(25deg);
+}
+
+.envelope-area {
+    position: relative;
+    width: min(90vw, 460px);
+    height: 350px;
+    margin-top: 10px;
+}
+
+.envelope-shadow {
+    position: absolute;
+    right: 8%;
+    bottom: 15px;
+    left: 8%;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(45, 5, 15, 0.3);
+    filter: blur(14px);
+}
+
+.envelope {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 300px;
+    margin: auto;
+    perspective: 1000px;
+    filter: drop-shadow(0 20px 20px rgba(45, 5, 15, 0.25));
+}
+
+
+/* Back part of envelope */
+
+.envelope-back {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    border: 2px solid var(--gold);
+    border-radius: 5px;
+    background: #651827;
+}
+
+
+/* Paper inside envelope */
+
+.invitation-paper {
+    position: absolute;
+    z-index: 1;
+    top: 22px;
+    left: 8%;
+    width: 84%;
+    height: 245px;
+    padding: 50px 15px;
+    border: 1px solid var(--gold);
+    color: var(--burgundy);
+    background: var(--paper);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.13);
+    transition: transform 1.4s ease;
+}
+
+.invitation-paper p {
+    color: var(--brown);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.invitation-paper h1 {
+    margin: 25px 0 13px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.invitation-paper h1 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.small-line {
+    width: 70px;
+    height: 1px;
+    margin: 15px auto;
+    background: var(--gold);
+}
+
+
+/* Front pocket of envelope */
+
+.envelope-pocket {
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+    border: 2px solid var(--gold);
+    background: #54121f;
+    clip-path: polygon(0 100%, 50% 43%, 100% 100%);
+}
+
+
+/* Flap of envelope */
+
+.envelope-flap {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    border-bottom: 2px solid var(--gold);
+    background: #741d2f;
+    clip-path: polygon(0 0, 100% 0, 50% 59%);
+    transform-origin: top center;
+    transition: transform 1s ease;
+}
+
+
+/* Wax seal */
+
+.wax-seal {
+    position: absolute;
+    z-index: 8;
+    bottom: 55px;
+    left: 50%;
+    width: 85px;
+    height: 85px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: #f3d477;
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #963a4a,
+            var(--burgundy) 65%
+        );
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.35);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    transform: translateX(-50%);
+    cursor: pointer;
+    transition: opacity 0.5s ease, transform 0.4s ease;
+}
+
+.wax-seal span {
+    color: #f3d477;
+}
+
+.wax-seal b {
+    color: white;
+    font-style: italic;
+}
+
+.wax-seal:hover {
+    transform: translateX(-50%) scale(1.1);
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .invitation-paper {
+    z-index: 6;
+    transform: translateY(-170px);
+}
+
+.envelope.open .wax-seal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.open-instruction {
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
+    color: var(--brown);
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.bottom-initials {
+    position: relative;
+    z-index: 2;
+    margin-top: 22px;
+    color: var(--dark-gold);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 25px;
+}
+
+
+/* =========================
+   Main Invitation
+========================= */
+
+.invitation {
+    display: none;
+    min-height: 100vh;
+    background:
+        linear-gradient(
+            rgba(248, 238, 227, 0.91),
+            rgba(248, 238, 227, 0.95)
+        ),
+        url("images/couple-1.jpeg") center / cover fixed;
+}
+
+.invitation.show {
+    display: block;
+    animation: pageAppear 1.2s ease both;
+}
+
+@keyframes pageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    width: min(92%, 800px);
+    margin: auto;
+    padding: 115px 22px;
+    text-align: center;
+}
+
+.section-label {
+    margin-bottom: 20px;
+    color: var(--dark-gold);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+}
+
+.gold-flower {
+    color: var(--gold);
+    font-family: Georgia, serif;
+    font-size: 38px;
+}
+
+.gold-line {
+    width: 90px;
+    height: 1px;
+    margin: 25px auto;
+    background: var(--gold);
+}
+
+h2 {
+    margin: 18px 0 25px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(45px, 8vw, 78px);
+    font-weight: 500;
+}
+
+
+/* =========================
+   CD Music Button
+========================= */
+
+.music-disc {
+    position: fixed;
+    z-index: 20;
+    top: 25px;
+    right: 25px;
+    width: 100px;
+    height: 100px;
+    border: 5px solid var(--gold);
+    border-radius: 50%;
+    color: #f5df91;
+    background:
+        radial-gradient(
+            circle,
+            var(--cream) 0 10%,
+            var(--burgundy) 11% 18%,
+            var(--gold) 19% 22%,
+            var(--burgundy) 23% 100%
+        );
+    box-shadow:
+        0 6px 18px rgba(52, 8, 17, 0.4),
+        inset 0 0 0 3px rgba(255, 255, 255, 0.2);
+    font-size: 38px;
+    cursor: pointer;
+    animation: discRotate 3s linear infinite;
+}
+
+.music-disc::after {
+    position: absolute;
+    inset: 13px;
+    border: 2px dashed #f7df86;
+    border-radius: 50%;
+    content: "";
+}
+
+.music-disc span {
+    position: relative;
+    z-index: 2;
+}
+
+.music-disc.paused {
+    animation-play-state: paused;
+}
+
+@keyframes discRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+.music-disc::after {
+    position: absolute;
+    inset: 9px;
+    border: 1px dashed #f7df86;
+    border-radius: 50%;
+    content: "";
+}
+
+.music-disc.playing {
+    animation: discRotate 3s linear infinite;
+}
+
+@keyframes discRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================
+   Hero
+========================= */
+
+.hero {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.couple-names {
+    margin: 25px 0;
+    color: var(--burgundy);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(70px, 16vw, 135px);
+    font-weight: 500;
+    line-height: 0.75;
+}
+
+.couple-names span {
+    display: block;
+    margin: 22px;
+    color: var(--gold);
+    font-size: 0.48em;
+    font-style: italic;
+}
+
+.welcome-text {
+    max-width: 540px;
+    color: var(--brown);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 25px;
+    line-height: 1.45;
+}
+
+.verse {
+    max-width: 620px;
+    margin-top: 35px;
+    color: var(--light-brown);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   Date and Countdown
+========================= */
+
+.date-section {
+    background: rgba(255, 250, 243, 0.72);
+}
+
+.date-card {
+    width: 290px;
+    margin: 35px auto 25px;
+    padding: 23px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+}
+
+.date-card p {
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.date-card strong {
+    display: block;
+    margin: 10px;
+    color: var(--gold);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 85px;
+    line-height: 0.9;
+}
+
+.wedding-time {
+    color: var(--brown);
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: clamp(12px, 5vw, 45px);
+    margin-top: 45px;
+}
+
+.countdown-box strong {
+    display: block;
+    color: var(--burgundy);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 62px;
+}
+
+.countdown-box span {
+    color: var(--brown);
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   Venue and Dress Code
+========================= */
+
+.venue-address,
+.venue-text,
+.dress-section p,
+.closing-section p {
+    color: var(--brown);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 23px;
+    line-height: 1.5;
+}
+
+.venue-text {
+    max-width: 520px;
+    margin: 25px auto;
+    font-size: 19px;
+}
+
+.location-button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 15px 30px;
+    color: white;
+    background: var(--burgundy);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+.location-button:hover {
+    background: var(--dark-burgundy);
+}
+
+
+/* =========================
+   Gallery
+========================= */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 270px;
+    border: 6px solid var(--paper);
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(74, 16, 29, 0.2);
+}
+
+
+/* =========================
+   Closing
+========================= */
+
+.closing-section {
+    width: 100%;
+    max-width: none;
+    color: var(--paper);
+    background: var(--burgundy);
+}
+
+.closing-section h2,
+.closing-section p {
+    color: var(--paper);
+}
+
+.signature {
+    color: #edd27d !important;
+    font-size: 25px !important;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+
+    .decor {
+        font-size: 75px;
+    }
+
+    .envelope-area {
+        height: 295px;
+    }
+
+    .envelope {
+        height: 250px;
+    }
+
+    .invitation-paper {
+        height: 205px;
+        padding-top: 36px;
+    }
+
+    .invitation-paper h1 {
+        font-size: 37px;
+    }
+
+    .wax-seal {
+        bottom: 43px;
+        width: 70px;
+        height: 70px;
+        font-size: 18px;
+    }
+
+    .envelope.open .invitation-paper {
+        transform: translateY(-140px);
+    }
+
+    .section {
+        padding: 85px 18px;
+    }
+
+    .welcome-text {
+        font-size: 21px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery img {
+        height: 330px;
+    }
+
+    .countdown {
+        gap: 10px;
+    }
+
+    .countdown-box strong {
+        font-size: 43px;
+    }
+
+    .music-disc {
+    width: 82px;
+    height: 82px;
+    top: 18px;
+    right: 18px;
+    font-size: 30px;
+}
+
+}
