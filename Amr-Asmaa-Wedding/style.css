@@ -288,7 +288,7 @@ button {
             rgba(248, 238, 227, 0.91),
             rgba(248, 238, 227, 0.95)
         ),
-        url("images/couple-1.jpeg") center / cover fixed;
+        url("couple-1.jpeg") center / cover fixed;
 }
 
 .invitation.show {
